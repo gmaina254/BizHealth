@@ -8,12 +8,12 @@
 
 ## Features
 
-- 📊 **Financial Health Score** (0–100) powered by the Altman Z-Score model
-- 📈 **Key Ratio Analysis** — Profitability, Liquidity, Leverage, and Efficiency
-- ✅ **Strengths & Weaknesses** — plain-language breakdown of your financial position
-- 🤖 **AI Insights** — contextual narrative summary of your results
-- 📋 **Actionable Recommendations** — immediate and quarterly action items
-- 📥 **Export Report** — download a text report to share with advisors or lenders
+-  **Financial Health Score** (0–100) powered by the Altman Z-Score model
+-  **Key Ratio Analysis** — Profitability, Liquidity, Leverage, and Efficiency
+-  **Strengths & Weaknesses** — plain-language breakdown of your financial position
+-  **AI Insights** — contextual narrative summary of your results
+-  **Actionable Recommendations** — immediate and quarterly action items
+-  **Export Report** — download a text report to share with advisors or lenders
 
 ## Tech Stack
 
@@ -90,12 +90,9 @@ Deploy the `dist/` folder to any static hosting provider:
 | **Vercel** | `npx vercel` in the project root, or connect your GitHub repo |
 | **GitHub Pages** | Push `dist/` to the `gh-pages` branch |
 
-> ⚠️ **SPA routing**: Add a rewrite rule so all paths serve `index.html`. On Netlify, create `public/_redirects` containing `/* /index.html 200`.
+>  **SPA routing**: Add a rewrite rule so all paths serve `index.html`. On Netlify, create `public/_redirects` containing `/* /index.html 200`.
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
-## License
-
-MIT
