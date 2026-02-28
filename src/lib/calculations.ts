@@ -1,39 +1,46 @@
 import { FinancialData, FinancialAnalysis, FinancialRatios } from "@/types/financial";
 
+/** Safe division — returns 0 instead of NaN or ±Infinity when divisor is 0. */
+const safeDiv = (numerator: number, denominator: number): number => {
+  if (denominator === 0) return 0;
+  const result = numerator / denominator;
+  return isFinite(result) ? result : 0;
+};
+
 export const calculateFinancialHealth = (data: FinancialData): FinancialAnalysis => {
-  const { incomeStatement, balanceSheet, cashFlow } = data;
+  const { incomeStatement, balanceSheet } = data;
 
   // Calculate ratios
   const ratios: FinancialRatios = {
     profitability: {
-      grossMargin: (incomeStatement.grossProfit / incomeStatement.totalRevenue) * 100,
-      operatingMargin: (incomeStatement.operatingIncome / incomeStatement.totalRevenue) * 100,
-      netMargin: (incomeStatement.netIncome / incomeStatement.totalRevenue) * 100,
+      grossMargin: safeDiv(incomeStatement.grossProfit, incomeStatement.totalRevenue) * 100,
+      operatingMargin: safeDiv(incomeStatement.operatingIncome, incomeStatement.totalRevenue) * 100,
+      netMargin: safeDiv(incomeStatement.netIncome, incomeStatement.totalRevenue) * 100,
     },
     liquidity: {
-      currentRatio: balanceSheet.currentAssets / balanceSheet.currentLiabilities,
-      quickRatio: (balanceSheet.currentAssets - (balanceSheet.currentAssets * 0.3)) / balanceSheet.currentLiabilities,
+      currentRatio: safeDiv(balanceSheet.currentAssets, balanceSheet.currentLiabilities),
+      quickRatio: safeDiv(balanceSheet.currentAssets * 0.7, balanceSheet.currentLiabilities),
     },
     leverage: {
-      debtToEquity: balanceSheet.totalLiabilities / balanceSheet.stockholdersEquity,
-      debtToAssets: balanceSheet.totalLiabilities / balanceSheet.totalAssets,
+      debtToEquity: safeDiv(balanceSheet.totalLiabilities, balanceSheet.stockholdersEquity),
+      debtToAssets: safeDiv(balanceSheet.totalLiabilities, balanceSheet.totalAssets),
     },
     efficiency: {
-      returnOnAssets: (incomeStatement.netIncome / balanceSheet.totalAssets) * 100,
-      returnOnEquity: (incomeStatement.netIncome / balanceSheet.stockholdersEquity) * 100,
+      returnOnAssets: safeDiv(incomeStatement.netIncome, balanceSheet.totalAssets) * 100,
+      returnOnEquity: safeDiv(incomeStatement.netIncome, balanceSheet.stockholdersEquity) * 100,
     },
   };
 
   // Calculate Altman Z-Score
   const workingCapital = balanceSheet.currentAssets - balanceSheet.currentLiabilities;
   const retainedEarnings = balanceSheet.stockholdersEquity * 0.5; // Approximation
-  
-  const x1 = workingCapital / balanceSheet.totalAssets;
-  const x2 = retainedEarnings / balanceSheet.totalAssets;
-  const x3 = incomeStatement.operatingIncome / balanceSheet.totalAssets;
-  const x4 = balanceSheet.stockholdersEquity / balanceSheet.totalLiabilities;
-  const x5 = incomeStatement.totalRevenue / balanceSheet.totalAssets;
-  
+
+  const x1 = safeDiv(workingCapital, balanceSheet.totalAssets);
+  const x2 = safeDiv(retainedEarnings, balanceSheet.totalAssets);
+  const x3 = safeDiv(incomeStatement.operatingIncome, balanceSheet.totalAssets);
+  const x4 = safeDiv(balanceSheet.stockholdersEquity, balanceSheet.totalLiabilities);
+  const x5 = safeDiv(incomeStatement.totalRevenue, balanceSheet.totalAssets);
+
   const zScore = 1.2 * x1 + 1.4 * x2 + 3.3 * x3 + 0.6 * x4 + 1.0 * x5;
 
   // Determine risk level
@@ -43,7 +50,7 @@ export const calculateFinancialHealth = (data: FinancialData): FinancialAnalysis
   else riskLevel = "At Risk";
 
   // Calculate health score (0-100)
-  const healthScore = Math.min(100, Math.max(0, 
+  const healthScore = Math.min(100, Math.max(0,
     (zScore / 3) * 30 +
     (ratios.profitability.netMargin / 20) * 25 +
     (ratios.liquidity.currentRatio / 2) * 20 +
@@ -82,9 +89,9 @@ export const calculateFinancialHealth = (data: FinancialData): FinancialAnalysis
   // Generate AI insights
   const aiInsights = `Your business shows a Z-Score of ${zScore.toFixed(2)}, indicating ${riskLevel.toLowerCase()} financial status. 
   With a net profit margin of ${ratios.profitability.netMargin.toFixed(1)}% and current ratio of ${ratios.liquidity.currentRatio.toFixed(2)}, 
-  ${riskLevel === "Healthy" ? "your company demonstrates solid financial fundamentals" : 
-    riskLevel === "Watch" ? "there are areas requiring attention to prevent financial deterioration" : 
-    "immediate action is needed to improve financial stability"}. 
+  ${riskLevel === "Healthy" ? "your company demonstrates solid financial fundamentals" :
+      riskLevel === "Watch" ? "there are areas requiring attention to prevent financial deterioration" :
+        "immediate action is needed to improve financial stability"}. 
   Focus on ${weaknesses.length > 0 ? "improving " + weaknesses[0].toLowerCase() : "maintaining current performance"}.`;
 
   // Generate recommendations

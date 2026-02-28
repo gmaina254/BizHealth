@@ -1,73 +1,101 @@
-# Welcome to your Lovable project
+# BizHealth AI
 
-## Project info
+**BizHealth AI** is an instant, AI-powered financial health assessment tool for businesses. Enter your financial data and get a clear health score, key ratio analysis, strengths & improvement areas, and prioritised action recommendations — no accounting background required.
 
-**URL**: https://lovable.dev/projects/224372e2-bb2f-49ab-aaf0-d9e906ca9dfb
+## Live Demo
 
-## How can I edit this code?
+> Deploy to Netlify or Vercel and add your URL here.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- 📊 **Financial Health Score** (0–100) powered by the Altman Z-Score model
+- 📈 **Key Ratio Analysis** — Profitability, Liquidity, Leverage, and Efficiency
+- ✅ **Strengths & Weaknesses** — plain-language breakdown of your financial position
+- 🤖 **AI Insights** — contextual narrative summary of your results
+- 📋 **Actionable Recommendations** — immediate and quarterly action items
+- 📥 **Export Report** — download a text report to share with advisors or lenders
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/224372e2-bb2f-49ab-aaf0-d9e906ca9dfb) and start prompting.
+## Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- [Vite](https://vitejs.dev/) + [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- [React Router](https://reactrouter.com/) for client-side routing
+- [Recharts](https://recharts.org/) for data visualisation
+- [Zod](https://zod.dev/) + [React Hook Form](https://react-hook-form.com/) for form validation
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm v9 or higher
 
-Follow these steps:
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Clone the repository
+git clone https://github.com/gmaina254/BizHealth.git
+cd BizHealth
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 3. Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:8080`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
 
-**Use GitHub Codespaces**
+```sh
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The production-ready files will be in the `dist/` folder.
 
-## What technologies are used for this project?
+### Preview Production Build Locally
 
-This project is built with:
+```sh
+npm run preview
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
+```
+src/
+├── components/
+│   ├── assesment/      # Assessment step components (Income, Balance Sheet, Cash Flow)
+│   ├── results/        # Results display components (Score, Metrics, Recommendations)
+│   └── ui/             # shadcn/ui base components
+├── lib/
+│   ├── calculations.ts # Core financial ratio & Z-Score engine
+│   └── utils.ts
+├── pages/
+│   ├── Landing.tsx     # Home / landing page
+│   ├── Assessment.tsx  # 3-step assessment wizard
+│   ├── Results.tsx     # Financial health results & report
+│   └── NotFound.tsx    # 404 page
+└── types/
+    └── financial.ts    # TypeScript interfaces for all financial data
+```
 
-Simply open [Lovable](https://lovable.dev/projects/224372e2-bb2f-49ab-aaf0-d9e906ca9dfb) and click on Share -> Publish.
+## Deployment
 
-## Can I connect a custom domain to my Lovable project?
+Deploy the `dist/` folder to any static hosting provider:
 
-Yes, you can!
+| Platform | Steps |
+|----------|-------|
+| **Netlify** | Drag-drop `dist/` at [app.netlify.com/drop](https://app.netlify.com/drop) |
+| **Vercel** | `npx vercel` in the project root, or connect your GitHub repo |
+| **GitHub Pages** | Push `dist/` to the `gh-pages` branch |
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+> ⚠️ **SPA routing**: Add a rewrite rule so all paths serve `index.html`. On Netlify, create `public/_redirects` containing `/* /index.html 200`.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
+
+## License
+
+MIT

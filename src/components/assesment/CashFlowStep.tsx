@@ -49,13 +49,13 @@ const CashFlowStep = ({ data, onChange }: CashFlowStepProps) => {
 
       <div className="mt-6 p-4 bg-muted rounded-lg">
         <p className="text-sm text-muted-foreground">
-          <strong>Important:</strong> Operating cash flow is often considered more important than net income 
+          <strong>Important:</strong> Operating cash flow is often considered more important than net income
           because it shows actual cash your business generates, not just accounting profits.
         </p>
       </div>
 
       <div className="mt-4 p-4 bg-success/10 border border-success/20 rounded-lg">
-        <p className="text-sm font-medium text-success-foreground">
+        <p className="text-sm font-medium text-success">
           Ready to see your results! Click "View Results" to get your financial health assessment.
         </p>
       </div>

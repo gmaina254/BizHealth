@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import IncomeStatementStep from "@/components/assessment/IncomeStatementStep";
-import BalanceSheetStep from "@/components/assessment/BalanceSheetStep";
-import CashFlowStep from "@/components/assessment/CashFlowStep";
+import IncomeStatementStep from "@/components/assesment/IncomeStatementStep";
+import BalanceSheetStep from "@/components/assesment/BalanceSheetStep";
+import CashFlowStep from "@/components/assesment/CashFlowStep";
 import { FinancialData } from "@/types/financial";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Logo from "@/components/Logo";
@@ -72,7 +72,7 @@ const Assessment = () => {
       <div className="container mx-auto px-4 pt-6 max-w-3xl">
         <Logo />
       </div>
-      
+
       <div className="container mx-auto px-4 py-8 max-w-3xl">
         {/* Header */}
         <div className="text-center mb-8">
@@ -85,7 +85,7 @@ const Assessment = () => {
           <Progress value={progress} className="h-2" />
           <div className="flex justify-between mt-2 text-sm text-muted-foreground">
             {stepTitles.map((title, index) => (
-              <span 
+              <span
                 key={index}
                 className={currentStep > index + 1 ? "text-success font-medium" : currentStep === index + 1 ? "text-primary font-medium" : ""}
               >
@@ -98,19 +98,19 @@ const Assessment = () => {
         {/* Step Content */}
         <div className="mb-8">
           {currentStep === 1 && (
-            <IncomeStatementStep 
+            <IncomeStatementStep
               data={financialData.incomeStatement}
               onChange={(data) => updateFinancialData("incomeStatement", data)}
             />
           )}
           {currentStep === 2 && (
-            <BalanceSheetStep 
+            <BalanceSheetStep
               data={financialData.balanceSheet}
               onChange={(data) => updateFinancialData("balanceSheet", data)}
             />
           )}
           {currentStep === 3 && (
-            <CashFlowStep 
+            <CashFlowStep
               data={financialData.cashFlow}
               onChange={(data) => updateFinancialData("cashFlow", data)}
             />
@@ -119,16 +119,16 @@ const Assessment = () => {
 
         {/* Navigation */}
         <div className="flex justify-between items-center">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={handleBack}
             className="flex items-center gap-2"
           >
             <ChevronLeft className="w-4 h-4" />
             {currentStep === 1 ? "Back to Home" : "Previous"}
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={handleNext}
             className="bg-gradient-primary flex items-center gap-2"
           >
