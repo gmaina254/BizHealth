@@ -1,10 +1,10 @@
 # BizHealth AI
 
-**BizHealth AI** is an instant, AI-powered financial health assessment tool for businesses. Enter your financial data and get a clear health score, key ratio analysis, strengths & improvement areas, and prioritised action recommendations — no accounting background required.
+**BizHealth** is an instant, financial health assessment tool for businesses. Enter your financial data and get a clear health score, key ratio analysis, strengths & improvement areas, and prioritised action recommendations, no accounting background required.
 
 ## Live Demo
 
-> Deploy to Netlify or Vercel and add your URL here.
+> https://bizhealth-git-main-gmaina254s-projects.vercel.app/
 
 ## Features
 
