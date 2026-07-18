@@ -27,7 +27,7 @@ const Landing = () => {
           </h1>
           
           <p className="text-xl text-muted-foreground mb-8">
-            Get an instant, AI-powered assessment of your company's financial health. 
+            Get an instant, assessment of your company's financial health. 
             No complex jargon—just clear insights and actionable recommendations.
           </p>
           
