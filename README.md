@@ -86,11 +86,10 @@ Deploy the `dist/` folder to any static hosting provider:
 
 | Platform | Steps |
 |----------|-------|
-| **Netlify** | Drag-drop `dist/` at [app.netlify.com/drop](https://app.netlify.com/drop) |
-| **Vercel** | `npx vercel` in the project root, or connect your GitHub repo |
-| **GitHub Pages** | Push `dist/` to the `gh-pages` branch |
 
->  **SPA routing**: Add a rewrite rule so all paths serve `index.html`. On Netlify, create `public/_redirects` containing `/* /index.html 200`.
+| **Vercel** | `npx vercel` in the project root, or connect your GitHub repo |
+
+
 
 ## Contributing
 
